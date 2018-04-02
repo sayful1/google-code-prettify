@@ -18,8 +18,12 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 if ( ! class_exists( 'Google_Code_Prettify' ) ) {
+
 	class Google_Code_Prettify {
 
+		/**
+		 * @var object
+		 */
 		private static $instance;
 
 		/**
@@ -57,8 +61,19 @@ if ( ! class_exists( 'Google_Code_Prettify' ) ) {
 		}
 
 		public static function load_scripts() {
-			wp_enqueue_style( 'google-code-prettify', GOOGLE_CODE_PRETTIFY_ASSETS . '/css/prettify.css' );
-			wp_enqueue_script( 'google-code-prettify', GOOGLE_CODE_PRETTIFY_ASSETS . '/js/prettify.js' );
+//			wp_enqueue_style( 'google-code-prettify', GOOGLE_CODE_PRETTIFY_ASSETS . '/css/prettify.css' );
+//			wp_enqueue_script( 'google-code-prettify', GOOGLE_CODE_PRETTIFY_ASSETS . '/js/prettify.js' );
+			wp_enqueue_style(
+				'google-code-prettify',
+				GOOGLE_CODE_PRETTIFY_ASSETS . '/libs/highlight/css/github.css'
+			);
+			wp_enqueue_script(
+				'highlight',
+				GOOGLE_CODE_PRETTIFY_ASSETS . '/libs/highlight/js/highlight.min.js',
+				array(),
+				'9.12.0',
+				false
+			);
 		}
 
 		/**
@@ -67,9 +82,10 @@ if ( ! class_exists( 'Google_Code_Prettify' ) ) {
 		public static function scripts() {
 			?>
             <script type="text/javascript">
-                window.addEventListener('load', function () {
-                    PR.prettyPrint();
-                })
+                // window.addEventListener('load', function () {
+                //     PR.prettyPrint();
+                // });
+                hljs.initHighlightingOnLoad();
             </script>
 			<?php
 		}

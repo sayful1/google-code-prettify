@@ -10,10 +10,10 @@ class Google_Code_Prettify_Widget extends \WP_Widget {
 	 */
 	public function __construct() {
 		$widget_ops = array(
-			'classname'   => 'google-code-prettify-widget',
+			'classname'   => 'code-highlight-widget',
 			'description' => 'An embeddable script that makes source-code snippets in HTML prettier.',
 		);
-		parent::__construct( 'google-code-prettify', '*Google Code Prettify', $widget_ops );
+		parent::__construct( 'google-code-prettify', 'Code Prettify', $widget_ops );
 	}
 
 	/**
@@ -30,10 +30,9 @@ class Google_Code_Prettify_Widget extends \WP_Widget {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
 		}
 
-		echo '<?prettify?>';
-		echo '<pre class="prettyprint linenums">';
-		echo htmlentities( $code );
-		echo '</pre>';
+		echo '<pre class="highlight"><code>';
+		echo htmlentities( $code, ENT_QUOTES, 'UTF-8' );
+		echo '</code></pre>';
 
 		echo $args['after_widget'];
 	}
