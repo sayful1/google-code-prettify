@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Shapla Pretty Code
  * Plugin URI: https://github.com/sayful1/google-code-prettify
- * Description: Syntax highlighting WordPress plugin for WordPress.
+ * Description: Syntax highlighting WordPress plugin for WordPress sites.
  * Version: 1.0.0
  * Author: Sayful Islam
  * Author URI: https://sayfulislam.com
@@ -65,14 +65,22 @@ if ( ! class_exists( 'Shapla_Pretty_Code' ) ) {
 			include_once GOOGLE_CODE_PRETTIFY_INCLUDES . '/class-shapla-pretty-code-widget.php';
 		}
 
+		/**
+		 * Update plugin from github
+		 */
 		public function update_plugin() {
 			require_once GOOGLE_CODE_PRETTIFY_INCLUDES . '/libraries/ShaplaGitHubPluginUpdater.php';
-			new ShaplaGitHubPluginUpdater( __FILE__, 'sayful1', "shapla-slider" );
+			new ShaplaGitHubPluginUpdater(
+				__FILE__,
+				'sayful1',
+				"shapla-slider"
+			);
 		}
 
+		/**
+		 * Load plugin public scripts
+		 */
 		public static function load_scripts() {
-			//wp_enqueue_style( 'google-code-prettify', GOOGLE_CODE_PRETTIFY_ASSETS . '/css/prettify.css' );
-			//wp_enqueue_script( 'google-code-prettify', GOOGLE_CODE_PRETTIFY_ASSETS . '/js/prettify.js' );
 			wp_enqueue_style( 'shapla-highlight-code',
 				GOOGLE_CODE_PRETTIFY_ASSETS . '/libs/highlight/css/github.css' );
 			wp_enqueue_script( 'shapla-highlight-code',
@@ -86,9 +94,6 @@ if ( ! class_exists( 'Shapla_Pretty_Code' ) ) {
 		public static function scripts() {
 			?>
             <script type="text/javascript">
-                // window.addEventListener('load', function () {
-                //     PR.prettyPrint();
-                // });
                 hljs.initHighlightingOnLoad();
             </script>
 			<?php

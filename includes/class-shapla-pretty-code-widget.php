@@ -77,6 +77,9 @@ class Shapla_Pretty_Code_Widget extends \WP_Widget {
 		return $instance;
 	}
 
+	/**
+	 * Register current class as widget
+	 */
 	public static function register() {
 		register_widget( __CLASS__ );
 	}

@@ -1,2 +1,3 @@
-# Google Code Prettify
-A WordPress plugin that makes source-code snippets in HTML prettier using google code prettify.
+# Shapla Pretty Code
+
+Syntax highlighting WordPress plugin for WordPress sites.
