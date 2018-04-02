@@ -4,13 +4,13 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-class Google_Code_Prettify_Widget extends \WP_Widget {
+class Shapla_Pretty_Code_Widget extends \WP_Widget {
 	/**
 	 * Sets up the widgets name etc
 	 */
 	public function __construct() {
 		$widget_ops = array(
-			'classname'   => 'code-highlight-widget',
+			'classname'   => 'shapla-pretty-code-widget',
 			'description' => 'An embeddable script that makes source-code snippets in HTML prettier.',
 		);
 		parent::__construct( 'google-code-prettify', 'Code Prettify', $widget_ops );
@@ -82,4 +82,4 @@ class Google_Code_Prettify_Widget extends \WP_Widget {
 	}
 }
 
-add_action( 'widgets_init', array( 'Google_Code_Prettify_Widget', 'register' ) );
+add_action( 'widgets_init', array( 'Shapla_Pretty_Code_Widget', 'register' ) );

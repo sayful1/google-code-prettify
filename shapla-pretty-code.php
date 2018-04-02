@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Google Code Prettify
- * Plugin URI: http://wordpress.org/plugins/carousel-slider
- * Description: An embeddable script that makes source-code snippets in HTML prettier.
+ * Plugin Name: Shapla Pretty Code
+ * Plugin URI: https://github.com/sayful1/google-code-prettify
+ * Description: Syntax highlighting WordPress plugin for WordPress.
  * Version: 1.0.0
  * Author: Sayful Islam
  * Author URI: https://sayfulislam.com
@@ -17,9 +17,9 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-if ( ! class_exists( 'Google_Code_Prettify' ) ) {
+if ( ! class_exists( 'Shapla_Pretty_Code' ) ) {
 
-	class Google_Code_Prettify {
+	class Shapla_Pretty_Code {
 
 		/**
 		 * @var object
@@ -27,7 +27,7 @@ if ( ! class_exists( 'Google_Code_Prettify' ) ) {
 		private static $instance;
 
 		/**
-		 * @return Google_Code_Prettify
+		 * @return Shapla_Pretty_Code
 		 */
 		public static function instance() {
 			if ( is_null( self::$instance ) ) {
@@ -42,11 +42,11 @@ if ( ! class_exists( 'Google_Code_Prettify' ) ) {
 		 */
 		public function __construct() {
 			$this->define_constants();
+			$this->includes();
+			$this->update_plugin();
 
 			add_action( 'wp_footer', array( __CLASS__, 'scripts' ) );
 			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_scripts' ) );
-
-			include_once __DIR__ . '/class-google-code-prettify-widget.php';
 		}
 
 		private function define_constants() {
@@ -54,26 +54,30 @@ if ( ! class_exists( 'Google_Code_Prettify' ) ) {
 			define( 'GOOGLE_CODE_PRETTIFY_FILE', __FILE__ );
 			define( 'GOOGLE_CODE_PRETTIFY_PATH', dirname( GOOGLE_CODE_PRETTIFY_FILE ) );
 			define( 'GOOGLE_CODE_PRETTIFY_INCLUDES', GOOGLE_CODE_PRETTIFY_PATH . '/includes' );
-			define( 'GOOGLE_CODE_PRETTIFY_TEMPLATES', GOOGLE_CODE_PRETTIFY_PATH . '/templates' );
-			define( 'GOOGLE_CODE_PRETTIFY_WIDGETS', GOOGLE_CODE_PRETTIFY_PATH . '/widgets' );
 			define( 'GOOGLE_CODE_PRETTIFY_URL', plugins_url( '', GOOGLE_CODE_PRETTIFY_FILE ) );
 			define( 'GOOGLE_CODE_PRETTIFY_ASSETS', GOOGLE_CODE_PRETTIFY_URL . '/assets' );
 		}
 
+		/**
+		 * Includes plugin files
+		 */
+		private function includes() {
+			include_once GOOGLE_CODE_PRETTIFY_INCLUDES . '/class-shapla-pretty-code-widget.php';
+		}
+
+		public function update_plugin() {
+			require_once GOOGLE_CODE_PRETTIFY_INCLUDES . '/libraries/ShaplaGitHubPluginUpdater.php';
+			new ShaplaGitHubPluginUpdater( __FILE__, 'sayful1', "shapla-slider" );
+		}
+
 		public static function load_scripts() {
-//			wp_enqueue_style( 'google-code-prettify', GOOGLE_CODE_PRETTIFY_ASSETS . '/css/prettify.css' );
-//			wp_enqueue_script( 'google-code-prettify', GOOGLE_CODE_PRETTIFY_ASSETS . '/js/prettify.js' );
-			wp_enqueue_style(
-				'google-code-prettify',
-				GOOGLE_CODE_PRETTIFY_ASSETS . '/libs/highlight/css/github.css'
-			);
-			wp_enqueue_script(
-				'highlight',
+			//wp_enqueue_style( 'google-code-prettify', GOOGLE_CODE_PRETTIFY_ASSETS . '/css/prettify.css' );
+			//wp_enqueue_script( 'google-code-prettify', GOOGLE_CODE_PRETTIFY_ASSETS . '/js/prettify.js' );
+			wp_enqueue_style( 'shapla-highlight-code',
+				GOOGLE_CODE_PRETTIFY_ASSETS . '/libs/highlight/css/github.css' );
+			wp_enqueue_script( 'shapla-highlight-code',
 				GOOGLE_CODE_PRETTIFY_ASSETS . '/libs/highlight/js/highlight.min.js',
-				array(),
-				'9.12.0',
-				false
-			);
+				array(), '9.12.0', false );
 		}
 
 		/**
@@ -99,4 +103,4 @@ if ( ! class_exists( 'Google_Code_Prettify' ) ) {
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  */
-Google_Code_Prettify::instance();
+Shapla_Pretty_Code::instance();
