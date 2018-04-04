@@ -45,10 +45,13 @@ if ( ! class_exists( 'Shapla_Pretty_Code' ) ) {
 			$this->includes();
 			$this->update_plugin();
 
-			add_action( 'wp_footer', array( __CLASS__, 'scripts' ) );
+			add_action( 'wp_footer', array( __CLASS__, 'scripts' ), 90 );
 			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'load_scripts' ) );
 		}
 
+		/**
+		 * Plugin constants
+		 */
 		private function define_constants() {
 			define( 'GOOGLE_CODE_PRETTIFY_VERSION', '1.0.0' );
 			define( 'GOOGLE_CODE_PRETTIFY_FILE', __FILE__ );
@@ -85,7 +88,7 @@ if ( ! class_exists( 'Shapla_Pretty_Code' ) ) {
 				GOOGLE_CODE_PRETTIFY_ASSETS . '/libs/highlight/css/github.css' );
 			wp_enqueue_script( 'shapla-highlight-code',
 				GOOGLE_CODE_PRETTIFY_ASSETS . '/libs/highlight/js/highlight.min.js',
-				array(), '9.12.0', false );
+				array(), '9.12.0', true );
 		}
 
 		/**
