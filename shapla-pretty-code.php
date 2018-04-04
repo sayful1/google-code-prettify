@@ -72,11 +72,11 @@ if ( ! class_exists( 'Shapla_Pretty_Code' ) ) {
 		 * Update plugin from github
 		 */
 		public function update_plugin() {
-			require_once GOOGLE_CODE_PRETTIFY_INCLUDES . '/libraries/ShaplaGitHubPluginUpdater.php';
-			new ShaplaGitHubPluginUpdater(
+			require_once GOOGLE_CODE_PRETTIFY_INCLUDES . '/libraries/class-shapla-github-plugin-updater.php';
+			new Shapla_GitHub_Plugin_Updater(
 				__FILE__,
 				'sayful1',
-				"shapla-slider"
+				"shapla-pretty-code"
 			);
 		}
 

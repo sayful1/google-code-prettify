@@ -4,18 +4,60 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-if ( ! class_exists( 'ShaplaGitHubPluginUpdater' ) ):
-	class ShaplaGitHubPluginUpdater {
+if ( ! class_exists( 'Shapla_GitHub_Plugin_Updater' ) ) {
+	class Shapla_GitHub_Plugin_Updater {
 
-		private $slug; // plugin slug
-		private $pluginData; // plugin data
-		private $username; // GitHub username
-		private $repo; // GitHub repo name
-		private $pluginFile; // __FILE__ of our plugin
-		private $githubAPIResult; // holds data from GitHub
-		private $accessToken; // GitHub private repo token
+		/**
+		 * plugin slug
+		 * @var string
+		 */
+		private $slug;
 
-		function __construct( $pluginFile, $gitHubUsername, $gitHubProjectName, $accessToken = '' ) {
+		/**
+		 * plugin data
+		 * @var
+		 */
+		private $pluginData;
+
+		/**
+		 * GitHub username
+		 * @var string
+		 */
+		private $username;
+
+		/**
+		 * GitHub repository name
+		 * @var string
+		 */
+		private $repo;
+
+		/**
+		 * __FILE__ of our plugin
+		 * @var string
+		 */
+		private $pluginFile;
+
+		/**
+		 * holds data from GitHub
+		 * @var object
+		 */
+		private $githubAPIResult;
+
+		/**
+		 * GitHub private repository token
+		 * @var string
+		 */
+		private $accessToken;
+
+		/**
+		 * Shapla_GitHub_Plugin_Updater constructor.
+		 *
+		 * @param string $pluginFile
+		 * @param string $gitHubUsername
+		 * @param string $gitHubProjectName
+		 * @param string $accessToken
+		 */
+		public function __construct( $pluginFile, $gitHubUsername, $gitHubProjectName, $accessToken = '' ) {
 			add_filter( "pre_set_site_transient_update_plugins", array( $this, "setTransitent" ) );
 			add_filter( "plugins_api", array( $this, "setPluginInfo" ), 10, 3 );
 			add_filter( "upgrader_post_install", array( $this, "postInstall" ), 10, 3 );
@@ -32,7 +74,9 @@ if ( ! class_exists( 'ShaplaGitHubPluginUpdater' ) ):
 			$this->pluginData = get_plugin_data( $this->pluginFile );
 		}
 
-		// Get information regarding our plugin from GitHub
+		/**
+		 * Get information regarding our plugin from GitHub
+		 */
 		private function getRepoReleaseInfo() {
 			// Only do this once
 			if ( ! empty( $this->githubAPIResult ) ) {
@@ -185,4 +229,4 @@ if ( ! class_exists( 'ShaplaGitHubPluginUpdater' ) ):
 			return $result;
 		}
 	}
-endif;
+}
