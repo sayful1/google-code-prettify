@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Shapla Pretty Code
- * Plugin URI: https://github.com/sayful1/google-code-prettify
+ * Plugin URI: https://github.com/sayful1/shapla-pretty-code
  * Description: Syntax highlighting WordPress plugin for WordPress sites.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Sayful Islam
  * Author URI: https://sayfulislam.com
  * Requires at least: 4.4
@@ -53,26 +53,26 @@ if ( ! class_exists( 'Shapla_Pretty_Code' ) ) {
 		 * Plugin constants
 		 */
 		private function define_constants() {
-			define( 'GOOGLE_CODE_PRETTIFY_VERSION', '1.0.0' );
-			define( 'GOOGLE_CODE_PRETTIFY_FILE', __FILE__ );
-			define( 'GOOGLE_CODE_PRETTIFY_PATH', dirname( GOOGLE_CODE_PRETTIFY_FILE ) );
-			define( 'GOOGLE_CODE_PRETTIFY_INCLUDES', GOOGLE_CODE_PRETTIFY_PATH . '/includes' );
-			define( 'GOOGLE_CODE_PRETTIFY_URL', plugins_url( '', GOOGLE_CODE_PRETTIFY_FILE ) );
-			define( 'GOOGLE_CODE_PRETTIFY_ASSETS', GOOGLE_CODE_PRETTIFY_URL . '/assets' );
+			define( 'SHAPLA_PRETTY_CODE_VERSION', '1.2.0' );
+			define( 'SHAPLA_PRETTY_CODE_FILE', __FILE__ );
+			define( 'SHAPLA_PRETTY_CODE_PATH', dirname( SHAPLA_PRETTY_CODE_FILE ) );
+			define( 'SHAPLA_PRETTY_CODE_INCLUDES', SHAPLA_PRETTY_CODE_PATH . '/includes' );
+			define( 'SHAPLA_PRETTY_CODE_URL', plugins_url( '', SHAPLA_PRETTY_CODE_FILE ) );
+			define( 'SHAPLA_PRETTY_CODE_ASSETS', SHAPLA_PRETTY_CODE_URL . '/assets' );
 		}
 
 		/**
 		 * Includes plugin files
 		 */
 		private function includes() {
-			include_once GOOGLE_CODE_PRETTIFY_INCLUDES . '/class-shapla-pretty-code-widget.php';
+			include_once SHAPLA_PRETTY_CODE_INCLUDES . '/class-shapla-pretty-code-widget.php';
 		}
 
 		/**
 		 * Update plugin from github
 		 */
 		public function update_plugin() {
-			require_once GOOGLE_CODE_PRETTIFY_INCLUDES . '/libraries/class-shapla-github-plugin-updater.php';
+			require_once SHAPLA_PRETTY_CODE_INCLUDES . '/libraries/class-shapla-github-plugin-updater.php';
 			new Shapla_GitHub_Plugin_Updater(
 				__FILE__,
 				'sayful1',
@@ -85,9 +85,9 @@ if ( ! class_exists( 'Shapla_Pretty_Code' ) ) {
 		 */
 		public static function load_scripts() {
 			wp_enqueue_style( 'shapla-highlight-code',
-				GOOGLE_CODE_PRETTIFY_ASSETS . '/libs/highlight/css/github.css' );
+				SHAPLA_PRETTY_CODE_ASSETS . '/libs/highlight/css/github.css' );
 			wp_enqueue_script( 'shapla-highlight-code',
-				GOOGLE_CODE_PRETTIFY_ASSETS . '/libs/highlight/js/highlight.min.js',
+				SHAPLA_PRETTY_CODE_ASSETS . '/libs/highlight/js/highlight.min.js',
 				array(), '9.12.0', true );
 		}
 
