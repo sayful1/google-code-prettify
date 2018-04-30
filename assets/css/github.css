@@ -1,9 +1,4 @@
-/*
-
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-
-*/
-pre.wp-code-block {
+pre.wp-block-code {
     padding: 0;
     white-space: pre;
 }
@@ -16,9 +11,8 @@ pre.wp-code-block {
     background: #f8f8f8;
 }
 
-.hljs-comment,
-.hljs-quote {
-    color: #998;
+.hljs-comment, .hljs-quote {
+    color: #999988;
     font-style: italic;
 }
 

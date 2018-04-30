@@ -1,25 +1,26 @@
 $code-background: #f8f8f8 !default;
 $code-color: #333 !default;
-$comment-color: #998 !default;
+$comment-color: #999988 !default;
 
 pre.wp-block-code {
   padding: 0;
   white-space: pre;
 }
 
-// code tag style
+// Style code tag
 .hljs {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
   color: $code-color;
   background: $code-background;
-}
 
-.hljs-comment,
-.hljs-quote {
-  color: $comment-color;
-  font-style: italic;
+  // Comment style
+  &-comment,
+  &-quote {
+    color: $comment-color;
+    font-style: italic;
+  }
 }
 
 .hljs-keyword,

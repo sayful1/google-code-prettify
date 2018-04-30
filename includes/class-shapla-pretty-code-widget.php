@@ -30,9 +30,11 @@ class Shapla_Pretty_Code_Widget extends \WP_Widget {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
 		}
 
-		echo '<pre class="wp-block-code"><code>';
+		echo '<pre class="wp-block-code">';
+		echo '<code>';
 		echo htmlentities( $code, ENT_QUOTES, 'UTF-8' );
-		echo '</code></pre>';
+		echo '</code>';
+		echo '</pre>';
 
 		echo $args['after_widget'];
 	}
@@ -71,8 +73,8 @@ class Shapla_Pretty_Code_Widget extends \WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance          = array();
-		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
-		$instance['code']  = ( ! empty( $new_instance['code'] ) ) ? wp_strip_all_tags( $new_instance['code'] ) : '';
+		$instance['title'] = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
+		$instance['code']  = ! empty( $new_instance['code'] ) ? $new_instance['code'] : '';
 
 		return $instance;
 	}

@@ -3,7 +3,7 @@
  * Plugin Name: Shapla Pretty Code
  * Plugin URI: https://github.com/sayful1/shapla-pretty-code
  * Description: Syntax highlighting WordPress plugin for WordPress sites.
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: Sayful Islam
  * Author URI: https://sayfulislam.com
  * Requires at least: 4.4
@@ -25,6 +25,20 @@ if ( ! class_exists( 'Shapla_Pretty_Code' ) ) {
 		 * @var object
 		 */
 		private static $instance;
+
+		/**
+		 * Plugin name slug
+		 *
+		 * @var string
+		 */
+		private static $plugin_name = 'shapla-pretty-code';
+
+		/**
+		 * Plugin version number
+		 *
+		 * @var string
+		 */
+		private static $version = '2.2.1';
 
 		/**
 		 * @return Shapla_Pretty_Code
@@ -53,7 +67,7 @@ if ( ! class_exists( 'Shapla_Pretty_Code' ) ) {
 		 * Plugin constants
 		 */
 		private function define_constants() {
-			define( 'SHAPLA_PRETTY_CODE_VERSION', '1.2.0' );
+			define( 'SHAPLA_PRETTY_CODE_VERSION', self::$version );
 			define( 'SHAPLA_PRETTY_CODE_FILE', __FILE__ );
 			define( 'SHAPLA_PRETTY_CODE_PATH', dirname( SHAPLA_PRETTY_CODE_FILE ) );
 			define( 'SHAPLA_PRETTY_CODE_INCLUDES', SHAPLA_PRETTY_CODE_PATH . '/includes' );
@@ -84,9 +98,9 @@ if ( ! class_exists( 'Shapla_Pretty_Code' ) ) {
 		 * Load plugin public scripts
 		 */
 		public static function load_scripts() {
-			wp_enqueue_style( 'shapla-highlight-code',
-				SHAPLA_PRETTY_CODE_ASSETS . '/libs/highlight/css/github.css' );
-			wp_enqueue_script( 'shapla-highlight-code',
+			wp_enqueue_style( self::$plugin_name,
+				SHAPLA_PRETTY_CODE_ASSETS . '/css/github.css', '', SHAPLA_PRETTY_CODE_VERSION );
+			wp_enqueue_script( self::$plugin_name,
 				SHAPLA_PRETTY_CODE_ASSETS . '/libs/highlight/js/highlight.min.js',
 				array(), '9.12.0', true );
 		}
